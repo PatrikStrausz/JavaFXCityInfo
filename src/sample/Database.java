@@ -64,4 +64,28 @@ public class Database {
         return null;
     }
 
+    public String getPop (String city){
+
+        try {
+            Connection connection = getConnection();
+            String cities = " ";
+            String select = "select json_extract(info,'$.Population') from city where name like ? ";
+            PreparedStatement statement = connection.prepareStatement(select);
+            statement.setString(1, city);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+               cities = resultSet.getString(1);
+                System.out.println( resultSet.getString(1));
+            }
+            return cities;
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+        return null;
+    }
+
 }

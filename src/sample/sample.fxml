@@ -24,9 +24,13 @@
             <Label fx:id="lblTemp" layoutX="376.0" layoutY="50.0" text="Temperature:" />
             <Label fx:id="lblHum" layoutX="395.0" layoutY="65.0" text="Humidity:" />
             <Label fx:id="lblVis" layoutX="399.0" layoutY="80.0" text="Visibility:" />
-            <Button fx:id="btnOk" layoutX="361.0" layoutY="149.0" mnemonicParsing="false" text="OK" />
+            <Button fx:id="btnOk" layoutX="361.0" layoutY="149.0" mnemonicParsing="false" onAction="#getInfo" text="OK" />
             <ComboBox fx:id="cmbCountry" layoutX="14.0" layoutY="88.0" onShowing="#bm" prefWidth="150.0" />
             <ComboBox fx:id="cmbCity" layoutX="192.0" layoutY="88.0" onShowing="#getCity" prefWidth="150.0" />
+            <Label fx:id="pop" layoutX="458.0" layoutY="35.0" text="Label" />
+            <Label fx:id="lblTemp" layoutX="458.0" layoutY="55.0" text="Label" />
+            <Label fx:id="lblHum" layoutX="458.0" layoutY="72.0" text="Label" />
+            <Label fx:id="lblVis" layoutX="458.0" layoutY="89.0" text="Label" />
          </children>
       </Pane>
    </children>

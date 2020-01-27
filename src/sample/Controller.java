@@ -13,10 +13,8 @@ public class Controller {
     public Button btnOk;
     public ComboBox <String> cmbCountry;
     public ComboBox <String> cmbCity;
-    public Label lblPop;
-    public Label lblTemp;
-    public Label lblHum;
-    public Label lblVis;
+
+    public Label pop;
     List countries;
     List cities;
 
@@ -66,7 +64,15 @@ public void getCity(){
     cmbCity.getItems().setAll(cities);
 }
 
+public void getInfo(){
 
+    Database database = new Database();
+    String city = cmbCity.getValue();
+
+   pop.setText(database.getPop(city));
+
+
+}
 
 
 }
