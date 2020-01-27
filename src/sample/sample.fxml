@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <Pane prefHeight="200.0" prefWidth="500.0">
+         <children>
+            <Label layoutX="30.0" layoutY="55.0" text="Select country:" />
+            <Label layoutX="211.0" layoutY="55.0" text="Select city:" />
+            <Label fx:id="lblPop" layoutX="387.0" layoutY="35.0" text="Population:" />
+            <Label fx:id="lblTemp" layoutX="376.0" layoutY="50.0" text="Temperature:" />
+            <Label fx:id="lblHum" layoutX="395.0" layoutY="65.0" text="Humidity:" />
+            <Label fx:id="lblVis" layoutX="399.0" layoutY="80.0" text="Visibility:" />
+            <Button fx:id="btnOk" layoutX="361.0" layoutY="149.0" mnemonicParsing="false" text="OK" />
+            <ComboBox fx:id="cmbCountry" layoutX="14.0" layoutY="88.0" onShowing="#bm" prefWidth="150.0" />
+            <ComboBox fx:id="cmbCity" layoutX="192.0" layoutY="88.0" onShowing="#getCity" prefWidth="150.0" />
+         </children>
+      </Pane>
+   </children>
+</GridPane>
