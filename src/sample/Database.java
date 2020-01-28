@@ -43,8 +43,10 @@ public class Database {
 
         try {
             Connection connection = getConnection();
-            List<String> cities = new ArrayList<>();
-            String select = "select city.name, city.countrycode from country inner join city on country.code = city.countrycode where country.name like ? order by city.name ";
+            List<City> cities = new ArrayList<>();
+            String select =
+                    "select city.name, city.CountryCode, country.code2, json_extract(info,'$.Population')as Info, country.name from country inner join city on " +
+                    "country.code = city.countrycode where country.name like ? order by city.name ";
 
             PreparedStatement statement = connection.prepareStatement(select);
             statement.setString(1, country);
@@ -52,9 +54,15 @@ public class Database {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                cities.add(resultSet.getString(1));
+               String name = (resultSet.getString("city.name"));
+               String code2 = (resultSet.getString("country.code2"));
+               String countryCode = (resultSet.getString("city.countrycode"));
+               int population = (resultSet.getInt("Info"));
+               String countryName = resultSet.getString("country.name");
+               City  city = new City(name, population, countryCode, code2, countryName);
+               cities.add(city);
             }
-            System.out.println(cities);
+
             return cities;
 
         } catch (Exception e) {
@@ -64,30 +72,8 @@ public class Database {
         return null;
     }
 
-    public String getPop (String city, String country){
-
-        try {
-            Connection connection = getConnection();
-            String cities = " ";
-            String select = "select json_extract(info,'$.Population') from city inner join country on city.countrycode = country.code where city.name like ? AND country.name = ?";
-            PreparedStatement statement = connection.prepareStatement(select);
-            statement.setString(1, city);
-            statement.setString(2, country);
 
 
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
-               cities = resultSet.getString(1);
-                System.out.println( resultSet.getString(1));
-            }
-            return cities;
 
-
-        }catch (Exception e){
-            e.printStackTrace();
-
-        }
-        return null;
-    }
 
 }
