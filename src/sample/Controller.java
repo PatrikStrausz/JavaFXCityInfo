@@ -14,7 +14,7 @@ public class Controller {
     public ComboBox <String> cmbCountry;
     public ComboBox <String> cmbCity;
 
-    public Label pop;
+    public Label lblPop;
     List countries;
     List cities;
 
@@ -22,8 +22,6 @@ public class Controller {
 
         Database database = new Database();
        countries =  database.getCountries();
-//       cmbCountry = new ComboBox<>();
-//        cmbCountry.getItems().addAll(countries);
     }
 
 
@@ -40,21 +38,17 @@ public void initialize(){
 
 
 public void bm (){
-
-
 //       Database database = new Database();
 //       countries = database.getCountries();
-//
 //       cmbCountry.getItems().setAll(countries);
         if(!cmbCountry.getSelectionModel().isSelected(1)) {
                cmbCity.setDisable(false);
-               btnOk.setDisable(false);
+
    }
 
 }
 
 public void getCity(){
-
 
     Database database = new Database();
     String city = cmbCountry.getValue();
@@ -62,14 +56,19 @@ public void getCity(){
     cities = database.getCities(city);
 
     cmbCity.getItems().setAll(cities);
+
+    if(!cmbCity.getSelectionModel().isSelected(1)) {
+        btnOk.setDisable(false);
+    }
 }
 
 public void getInfo(){
 
     Database database = new Database();
     String city = cmbCity.getValue();
+    String country = cmbCountry.getValue();
 
-   pop.setText(database.getPop(city));
+   lblPop.setText(database.getPop(city, country));
 
 
 }

@@ -18,7 +18,7 @@ public class Database {
             Connection connection = getConnection();
 
             List<String> country = new ArrayList<>();
-            String select = "Select code,  name from country ";
+            String select = "Select code,  name from country order by name";
 
             PreparedStatement statement = connection.prepareStatement(select);
             ResultSet resultSet = statement.executeQuery();
@@ -44,7 +44,7 @@ public class Database {
         try {
             Connection connection = getConnection();
             List<String> cities = new ArrayList<>();
-            String select = "select city.name from country inner join city on country.code = city.countrycode where country.name like ? ";
+            String select = "select city.name, city.countrycode from country inner join city on country.code = city.countrycode where country.name like ? order by city.name ";
 
             PreparedStatement statement = connection.prepareStatement(select);
             statement.setString(1, country);
@@ -64,14 +64,16 @@ public class Database {
         return null;
     }
 
-    public String getPop (String city){
+    public String getPop (String city, String country){
 
         try {
             Connection connection = getConnection();
             String cities = " ";
-            String select = "select json_extract(info,'$.Population') from city where name like ? ";
+            String select = "select json_extract(info,'$.Population') from city inner join country on city.countrycode = country.code where city.name like ? AND country.name = ?";
             PreparedStatement statement = connection.prepareStatement(select);
             statement.setString(1, city);
+            statement.setString(2, country);
+
 
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
