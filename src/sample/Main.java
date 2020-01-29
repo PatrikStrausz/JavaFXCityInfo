@@ -21,10 +21,13 @@ public class Main extends Application {
 
         primaryStage.setScene(new Scene(root, 600, 300));
         primaryStage.show();
+
     }
 
 
     public static void main(String[] args) {
         launch(args);
+        WebWeather webWeather = new WebWeather();
+        webWeather.getData("Kosice", "SK");
     }
 }

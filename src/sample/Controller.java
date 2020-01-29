@@ -13,26 +13,37 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Controller {
-
-    public Label lblCity;
-    public Label lblCountry;
+    public Label lblLot;
+    public Label lblLat;
     private Database database = new Database();
+
     @FXML
     private Button btnOk;
+
     @FXML
     private ComboBox<String> cmbCountry;
     @FXML
     private ComboBox<String> cmbCity;
-    @FXML
-    private Label lblPop;
+
     @FXML
     private List countries;
+
+    @FXML
+    private Label lblPop;
+    public Label lblCity;
+    public Label lblCountry;
+    public Label lblTemp;
+    public Label lblHum;
+    public Label lblVis;
+
 
     private List<City> city = null;
 
     public Controller() {
 
         countries = database.getCountries();
+
+
     }
 
 
@@ -71,38 +82,43 @@ public class Controller {
     public void getInfo() {
 
         String cityName = cmbCity.getValue();
-         City cities = null;
-         for(City c: city){
-             if(c.getName().equalsIgnoreCase(cityName)) {
-                 cities = c;
-                 System.out.println();
-                 System.out.println(c.getName() + " " + c.getPopulation());
-                 lblPop.setText(formatPopString((c.getPopulation())));
-                 lblCity.setText(c.getName());
-                 lblCountry.setText(c.getCountry());
-                 break;
-             }
-         }
-         if(cities==null) {
-             return;
-         }
+        City cities = null;
+        for (City c : city) {
+            if (c.getName().equalsIgnoreCase(cityName)) {
+                cities = c;
+                System.out.println();
+                System.out.println(c.getName() + " " + c.getPopulation());
+                lblPop.setText(formatPopString((c.getPopulation())));
+                lblCity.setText(c.getName());
+                lblCountry.setText(c.getCountry());
+               Weather weather = new WebWeather().getData(c.getName(), c.getCode2());
+
+
+//               lblTemp.setText("Temperature: " +String.valueOf(weather.getTemp()));
+//               lblHum.setText("Humidity: " +String.valueOf(weather.getHumidity()));
+                lblLot.setText("Lot: " +String.valueOf(weather.getLon()));
+                lblLat.setText("Lat: "+String.valueOf(weather.getLat()));
+            }
+        }
+        if (cities == null) {
+            return;
+        }
 
 
     }
 
-    private String formatPopString(int population){
+    private String formatPopString(int population) {
         String data = Integer.toString(population);
 
-        String text="";
+        String text = "";
 
-        for(int i=data.length()-1;i>=0;i--) {
-            if(i%3==0)
+        for (int i = data.length() - 1; i >= 0; i--) {
+            if (i % 3 == 0)
                 text = " " + text;
-                text = data.charAt(i) + text;
+            text = data.charAt(i) + text;
 
         }
         return text.trim();
-
 
 
     }
