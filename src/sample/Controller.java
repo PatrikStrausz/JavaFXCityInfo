@@ -3,18 +3,18 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Controller {
     public Label lblLot;
     public Label lblLat;
+    public CheckBox ckbxMore;
+    public Label lblSunrise;
+    public Label lblSunset;
     private Database database = new Database();
 
     @FXML
@@ -51,6 +51,12 @@ public class Controller {
         countries = database.getCountries();
 
         cmbCountry.getItems().setAll(countries);
+
+        lblVis.setVisible(false);
+        lblLot.setVisible(false);
+        lblLat.setVisible(false);
+        lblSunrise.setVisible(false);
+        lblSunset.setVisible(false);
     }
 
 
@@ -88,22 +94,83 @@ public class Controller {
                 cities = c;
                 System.out.println();
                 System.out.println(c.getName() + " " + c.getPopulation());
-                lblPop.setText(formatPopString((c.getPopulation())));
+                lblPop.setText(formatPopString(c.getPopulation()));
                 lblCity.setText(c.getName());
                 lblCountry.setText(c.getCountry());
-               Weather weather = new WebWeather().getData(c.getName(), c.getCode2());
+                Weather weather = new WebWeather().getData(c.getName(), c.getCode2());
 
 
-//               lblTemp.setText("Temperature: " +String.valueOf(weather.getTemp()));
-//               lblHum.setText("Humidity: " +String.valueOf(weather.getHumidity()));
-                lblLot.setText("Lot: " +String.valueOf(weather.getLon()));
-                lblLat.setText("Lat: "+String.valueOf(weather.getLat()));
+                lblTemp.setText("Temperature: " + String.valueOf(weather.getTemp()));
+                lblHum.setText("Humidity: " + String.valueOf(weather.getHumidity()));
+                lblVis.setText("Visibility: " + String.valueOf(weather.getVisibility()));
+                lblLot.setText("Lot: " + String.valueOf(weather.getLon()));
+                lblLat.setText("Lat: " + String.valueOf(weather.getLat()));
+
+
+
+
+
+
+
+
+                long millisecondsRise=weather.getSunrise();
+                System.out.println("MILI:"+millisecondsRise);
+                int minutes = (int) (((millisecondsRise  / 1000) / 60) % 60);
+                int hours   = (int) ((millisecondsRise /  1000) / 3600);
+
+
+              lblSunrise.setText("Sunrise: "+ hours +":"+minutes );
+
+                long millisecondsRises=weather.getSunset();
+                System.out.println("MILI:"+millisecondsRises);
+                int minutess = (int) (((millisecondsRises / 1000) / 60) % 60);
+                int hourss   = (int) ((millisecondsRises  / 1000) / 3600);
+
+                long a = weather.getSunset();
+            long Seconds = (60 - a / 1000 % 60);
+             long  Minutes = (60 - ((a / 1000) / 60) %60);
+                long Hours = ((((a / 1000) / 60) / 60) % 24);
+
+
+
+                System.out.println(Seconds);
+                System.out.println(Minutes);
+                System.out.println(Hours);
+
+
+
+              lblSunset.setText("Sunset: "  + hourss +":"+minutess );
+
+
             }
         }
         if (cities == null) {
             return;
         }
 
+
+
+
+    }
+
+    public void showMoreInfo(){
+        if (ckbxMore.isSelected()) {
+            lblVis.setVisible(true);
+            lblLot.setVisible(true);
+            lblLat.setVisible(true);
+            lblSunrise.setVisible(true);
+            lblSunset.setVisible(true);
+
+
+
+        }else if(!ckbxMore.isSelected()){
+
+            lblVis.setVisible(false);
+            lblLot.setVisible(false);
+            lblLat.setVisible(false);
+            lblSunrise.setVisible(false);
+            lblSunset.setVisible(false);
+        }
 
     }
 
