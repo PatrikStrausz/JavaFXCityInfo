@@ -1,11 +1,13 @@
 package sample;
 
 
+import com.lynden.gmapsfx.GoogleMapView;
+import com.lynden.gmapsfx.javascript.object.GoogleMap;
+import com.lynden.gmapsfx.service.geocoding.GeocodingService;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
 import java.util.List;
 
@@ -15,6 +17,7 @@ public class Controller {
     public CheckBox ckbxMore;
     public Label lblSunrise;
     public Label lblSunset;
+    public Label lblWindSpeed;
     private Database database = new Database();
 
     @FXML
@@ -39,6 +42,20 @@ public class Controller {
 
     private List<City> city = null;
 
+
+    @FXML
+    private GoogleMapView mapView;
+
+    @FXML
+    private TextField addressTextField;
+
+    private GoogleMap map;
+
+    private GeocodingService geocodingService;
+
+    private StringProperty address = new SimpleStringProperty();
+
+
     public Controller() {
 
         countries = database.getCountries();
@@ -57,6 +74,7 @@ public class Controller {
         lblLat.setVisible(false);
         lblSunrise.setVisible(false);
         lblSunset.setVisible(false);
+        lblWindSpeed.setVisible(false);
     }
 
 
@@ -105,6 +123,7 @@ public class Controller {
                     lblVis.setText("Visibility: " + String.valueOf(weather.getVisibility()));
                     lblLot.setText("Lot: " + String.valueOf(weather.getLon()));
                     lblLat.setText("Lat: " + String.valueOf(weather.getLat()));
+                    lblWindSpeed.setText("Wind speed: " + String.valueOf(weather.getWindSpeed()));
 
                 } else {
 
@@ -113,13 +132,13 @@ public class Controller {
                     lblVis.setText("Visibility: ---");
                     lblLot.setText("Lot: ---");
                     lblLat.setText("Lat: ---");
-
+                    lblWindSpeed.setText("Wind speed: ---");
 
                 }
 
 
                 lblSunrise.setText("Sunrise: " + getTimeFormat(weather.getSunrise()));
-                System.out.println( getTimeFormat(weather.getSunrise()));
+                System.out.println(getTimeFormat(weather.getSunrise()));
 
                 lblSunset.setText("Sunset: " + getTimeFormat(weather.getSunset()));
                 System.out.println(getTimeFormat(weather.getSunset()));
@@ -135,7 +154,7 @@ public class Controller {
     }
 
     public String getTimeFormat(long number) {
-        return new java.text.SimpleDateFormat("HH:mm:ss").format(new java.util.Date (number*1000));
+        return new java.text.SimpleDateFormat("HH:mm:ss").format(new java.util.Date(number * 1000));
     }
 
 
@@ -146,6 +165,7 @@ public class Controller {
             lblLat.setVisible(true);
             lblSunrise.setVisible(true);
             lblSunset.setVisible(true);
+            lblWindSpeed.setVisible(true);
 
 
         } else if (!ckbxMore.isSelected()) {
@@ -155,6 +175,7 @@ public class Controller {
             lblLat.setVisible(false);
             lblSunrise.setVisible(false);
             lblSunset.setVisible(false);
+            lblWindSpeed.setVisible(false);
         }
 
     }

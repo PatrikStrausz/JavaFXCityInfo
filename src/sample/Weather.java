@@ -11,8 +11,9 @@ public class Weather {
     private long visibility;
     private long sunrise;
     private long sunset;
+    private double windSpeed;
 
-    public Weather(String name, String country, double temp, long humidity, double lon, double lat, long visibility, long sunrise, long sunset) {
+    public Weather(String name, String country, double temp, long humidity, double lon, double lat, long visibility, long sunrise, long sunset, double windSpeed) {
         this.name = name;
         this.country = country;
         this.temp = temp;
@@ -22,6 +23,11 @@ public class Weather {
         this.visibility=visibility;
         this.sunrise = sunrise;
         this.sunset= sunset;
+        this.windSpeed = windSpeed;
+    }
+
+    public double getWindSpeed() {
+        return windSpeed;
     }
 
     public long getSunrise() {

@@ -34,6 +34,7 @@ public class WebWeather {
                 JSONObject main = jsonObject.getJSONObject("main");
                 JSONObject coord = jsonObject.getJSONObject("coord");
                 JSONObject sys = jsonObject.getJSONObject("sys");
+                JSONObject wind = jsonObject.getJSONObject("wind");
 
 
                 String name = jsonObject.getString("name");
@@ -43,13 +44,14 @@ public class WebWeather {
                 double lon = coord.getLong("lon");
                 double lat = coord.getLong("lat");
                 long visibility = jsonObject.getLong("visibility");
+                double windSpeed = wind.getDouble("speed");
 
 
                 long sunrise = sys.getLong("sunrise");
                 long sunset = sys.getLong("sunset");
 
 
-                weather = new Weather(name, country, temperature, humidity, lon, lat, visibility, sunrise, sunset);
+                weather = new Weather(name, country, temperature, humidity, lon, lat, visibility, sunrise, sunset, windSpeed);
 
 
             }
