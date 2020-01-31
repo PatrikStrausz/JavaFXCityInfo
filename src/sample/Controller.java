@@ -99,47 +99,30 @@ public class Controller {
                 lblCountry.setText(c.getCountry());
                 Weather weather = new WebWeather().getData(c.getName(), c.getCode2());
 
+                if (weather != null) {
+                    lblTemp.setText("Temperature: " + String.valueOf(weather.getTemp()));
+                    lblHum.setText("Humidity: " + String.valueOf(weather.getHumidity() + "%"));
+                    lblVis.setText("Visibility: " + String.valueOf(weather.getVisibility()));
+                    lblLot.setText("Lot: " + String.valueOf(weather.getLon()));
+                    lblLat.setText("Lat: " + String.valueOf(weather.getLat()));
 
-                lblTemp.setText("Temperature: " + String.valueOf(weather.getTemp()));
-                lblHum.setText("Humidity: " + String.valueOf(weather.getHumidity()));
-                lblVis.setText("Visibility: " + String.valueOf(weather.getVisibility()));
-                lblLot.setText("Lot: " + String.valueOf(weather.getLon()));
-                lblLat.setText("Lat: " + String.valueOf(weather.getLat()));
+                } else {
 
-
-
-
-
-
-
-
-                long millisecondsRise=weather.getSunrise();
-                System.out.println("MILI:"+millisecondsRise);
-                int minutes = (int) (((millisecondsRise  / 1000) / 60) % 60);
-                int hours   = (int) ((millisecondsRise /  1000) / 3600);
+                    lblTemp.setText("Temperature: ---");
+                    lblHum.setText("Humidity: ---");
+                    lblVis.setText("Visibility: ---");
+                    lblLot.setText("Lot: ---");
+                    lblLat.setText("Lat: ---");
 
 
-              lblSunrise.setText("Sunrise: "+ hours +":"+minutes );
-
-                long millisecondsRises=weather.getSunset();
-                System.out.println("MILI:"+millisecondsRises);
-                int minutess = (int) (((millisecondsRises / 1000) / 60) % 60);
-                int hourss   = (int) ((millisecondsRises  / 1000) / 3600);
-
-                long a = weather.getSunset();
-            long Seconds = (60 - a / 1000 % 60);
-             long  Minutes = (60 - ((a / 1000) / 60) %60);
-                long Hours = ((((a / 1000) / 60) / 60) % 24);
+                }
 
 
+                lblSunrise.setText("Sunrise: " + getTimeFormat(weather.getSunrise()));
+                System.out.println( getTimeFormat(weather.getSunrise()));
 
-                System.out.println(Seconds);
-                System.out.println(Minutes);
-                System.out.println(Hours);
-
-
-
-              lblSunset.setText("Sunset: "  + hourss +":"+minutess );
+                lblSunset.setText("Sunset: " + getTimeFormat(weather.getSunset()));
+                System.out.println(getTimeFormat(weather.getSunset()));
 
 
             }
@@ -149,11 +132,14 @@ public class Controller {
         }
 
 
-
-
     }
 
-    public void showMoreInfo(){
+    public String getTimeFormat(long number) {
+        return new java.text.SimpleDateFormat("HH:mm:ss").format(new java.util.Date (number*1000));
+    }
+
+
+    public void showMoreInfo() {
         if (ckbxMore.isSelected()) {
             lblVis.setVisible(true);
             lblLot.setVisible(true);
@@ -162,8 +148,7 @@ public class Controller {
             lblSunset.setVisible(true);
 
 
-
-        }else if(!ckbxMore.isSelected()){
+        } else if (!ckbxMore.isSelected()) {
 
             lblVis.setVisible(false);
             lblLot.setVisible(false);
@@ -175,17 +160,7 @@ public class Controller {
     }
 
     private String formatPopString(int population) {
-        String data = Integer.toString(population);
-
-        String text = "";
-
-        for (int i = data.length() - 1; i >= 0; i--) {
-            if (i % 3 == 0)
-                text = " " + text;
-            text = data.charAt(i) + text;
-
-        }
-        return text.trim();
+        return String.format("%,d", Integer.parseInt(String.valueOf(population)));
 
 
     }

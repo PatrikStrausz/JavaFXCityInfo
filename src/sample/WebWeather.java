@@ -43,6 +43,8 @@ public class WebWeather {
                 double lon = coord.getLong("lon");
                 double lat = coord.getLong("lat");
                 long visibility = jsonObject.getLong("visibility");
+
+
                 long sunrise = sys.getLong("sunrise");
                 long sunset = sys.getLong("sunset");
 
