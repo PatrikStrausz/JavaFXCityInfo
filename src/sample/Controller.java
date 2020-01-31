@@ -1,13 +1,11 @@
 package sample;
 
 
-import com.lynden.gmapsfx.GoogleMapView;
-import com.lynden.gmapsfx.javascript.object.GoogleMap;
-import com.lynden.gmapsfx.service.geocoding.GeocodingService;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 
 import java.util.List;
 
@@ -41,19 +39,6 @@ public class Controller {
 
 
     private List<City> city = null;
-
-
-    @FXML
-    private GoogleMapView mapView;
-
-    @FXML
-    private TextField addressTextField;
-
-    private GoogleMap map;
-
-    private GeocodingService geocodingService;
-
-    private StringProperty address = new SimpleStringProperty();
 
 
     public Controller() {
