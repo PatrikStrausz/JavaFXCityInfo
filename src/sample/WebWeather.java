@@ -41,8 +41,8 @@ public class WebWeather {
                 String country = sys.getString("country");
                 double temperature = main.getDouble("temp");
                 long humidity = main.getLong("humidity");
-                double lon = coord.getLong("lon");
-                double lat = coord.getLong("lat");
+                double lon = coord.getDouble("lon");
+                double lat = coord.getDouble("lat");
                 long visibility = jsonObject.getLong("visibility");
                 double windSpeed = wind.getDouble("speed");
 

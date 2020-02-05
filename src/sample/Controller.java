@@ -1,6 +1,7 @@
 package sample;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -16,6 +17,7 @@ public class Controller {
     public Label lblSunrise;
     public Label lblSunset;
     public Label lblWindSpeed;
+    public Button button;
     private Database database = new Database();
 
     @FXML
@@ -60,6 +62,8 @@ public class Controller {
         lblSunrise.setVisible(false);
         lblSunset.setVisible(false);
         lblWindSpeed.setVisible(false);
+
+
     }
 
 
@@ -172,4 +176,29 @@ public class Controller {
     }
 
 
+    public void openBrowser(ActionEvent actionEvent) throws Exception {
+
+
+        String cityName = cmbCity.getValue();
+        City cities = null;
+        for (City c : city) {
+            if (c.getName().equalsIgnoreCase(cityName)) {
+                cities = c;
+                Weather weather = new WebWeather().getData(c.getName(), c.getCode2());
+                Maps webInfo = new Maps();
+                webInfo.openBrowser(weather.getLat(), weather.getLon());
+
+
+            }
+
+
+        }
+
+
+    }
+
+
 }
+
+
+

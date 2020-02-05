@@ -38,7 +38,7 @@
             <CheckBox fx:id="ckbxMore" layoutX="361.0" layoutY="181.0" mnemonicParsing="false" onAction="#showMoreInfo" text="Show details" />
             <Label fx:id="lblSunrise" layoutX="206.0" layoutY="243.0" text="Sunrise:" />
             <Label fx:id="lblSunset" layoutX="206.0" layoutY="260.0" text="Sunset:" />
-            <Button layoutX="370.0" layoutY="222.0" mnemonicParsing="false"  text="Button" />
+            <Button fx:id="button" layoutX="362.0" layoutY="222.0" mnemonicParsing="false" onAction="#openBrowser" text="Show location" />
             <Label fx:id="lblWindSpeed" layoutX="206.0" layoutY="278.0" text="Wind speed:" />
 
 

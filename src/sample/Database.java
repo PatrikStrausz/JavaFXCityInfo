@@ -46,7 +46,7 @@ public class Database {
             List<City> cities = new ArrayList<>();
             String select =
                     "select city.name, city.CountryCode, country.code2, json_extract(info,'$.Population')as Info, country.name from country inner join city on " +
-                    "country.code = city.countrycode where country.name like ? order by city.name ";
+                            "country.code = city.countrycode where country.name like ? order by city.name ";
 
             PreparedStatement statement = connection.prepareStatement(select);
             statement.setString(1, country);
@@ -54,13 +54,13 @@ public class Database {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-               String name = (resultSet.getString("city.name"));
-               String code2 = (resultSet.getString("country.code2"));
-               String countryCode = (resultSet.getString("city.countrycode"));
-               int population = (resultSet.getInt("Info"));
-               String countryName = resultSet.getString("country.name");
-               City  city = new City(name, population, countryCode, code2, countryName);
-               cities.add(city);
+                String name = (resultSet.getString("city.name"));
+                String code2 = (resultSet.getString("country.code2"));
+                String countryCode = (resultSet.getString("city.countrycode"));
+                int population = (resultSet.getInt("Info"));
+                String countryName = resultSet.getString("country.name");
+                City city = new City(name, population, countryCode, code2, countryName);
+                cities.add(city);
             }
 
             return cities;
@@ -71,9 +71,6 @@ public class Database {
         }
         return null;
     }
-
-
-
 
 
 }

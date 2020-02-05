@@ -20,9 +20,9 @@ public class Weather {
         this.humidity = humidity;
         this.lon = lon;
         this.lat = lat;
-        this.visibility=visibility;
+        this.visibility = visibility;
         this.sunrise = sunrise;
-        this.sunset= sunset;
+        this.sunset = sunset;
         this.windSpeed = windSpeed;
     }
 
