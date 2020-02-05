@@ -54,6 +54,9 @@ public class WebWeather {
                 weather = new Weather(name, country, temperature, humidity, lon, lat, visibility, sunrise, sunset, windSpeed);
 
 
+            }else {
+                throw new NoSuchCityException("City not found.");
+
             }
 
 
