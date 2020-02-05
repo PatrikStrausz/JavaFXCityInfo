@@ -1,7 +1,6 @@
 package sample;
 
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -176,7 +175,7 @@ public class Controller {
     }
 
 
-    public void openBrowser(ActionEvent actionEvent) throws Exception {
+    public void openBrowser() {
 
 
         String cityName = cmbCity.getValue();
